@@ -1,35 +1,51 @@
-# Makefile for python applications
+# Makefile for python applications using venv
 # Richard Antal Nagy, 2022
 # https://gitlab.com/richardnagy/makefiles
 
 # Settings
-VENV_NAME=.venv
-DEPS_NAME=requirements.txt
-LOCK_NAME=pip.lock
-PYBIN=python3
-ENTRY_POINT=main.py
+venv_name := .venv
+deps_name := requirements.txt
+lock_name := pip.lock
+pybin := python3
+main := main.py
 
-# Run even if the given file or folder exists
-.PHONY: clean venv install run
+# Run even if a file or folder with the same name exists
+.PHONY: clean venv install run generate lock
 
 # Run program from virtual environment
-run: $(VENV_NAME)/bin/activate
-	./$(VENV_NAME)/bin/$(PYBIN) $(ENTRY_POINT)
+# Create virtual env if one does not exist, update requirements if changed
+run: $(venv_name)/bin/activate
+	@./$(venv_name)/bin/$(pybin) $(main)
 
 # Create virtual environment
-$(VENV_NAME)/bin/activate: $(DEPS_NAME)
-	make venv
-	make install
+$(venv_name)/bin/activate: $(deps_name)
+	@$(MAKE) -s venv
+	@$(MAKE) -s install
 
 # Force install dependencies from requirements
-install:
-	./$(VENV_NAME)/bin/pip install -r $(DEPS_NAME)
-	make lock
+install: $(deps_name)
+	@echo "Installing dependencies from $(deps_name)"
+	@./$(venv_name)/bin/pip install -r $(deps_name)
+	@$(MAKE) -s lock
 
 # Create a pip lock file
-lock:
-	./$(VENV_NAME)/bin/pip freeze > $(LOCK_NAME)
+lock: $(deps_name) $(venv_name)/bin/pip
+	@echo "Creating lock file: $(lock_name)"
+	@./$(venv_name)/bin/pip freeze > $(lock_name)
+
+# Remove virtual environment and caches
+clean:
+	@rm -rf $(venv_name) __pycache__/
 
 # Force create virtual environment
 venv:
-	$(PYBIN) -m venv $(VENV_NAME)
+	@echo "Creating virtual environment: $(venv_name)"
+	@$(pybin) -m venv $(venv_name)
+
+# Generate sample project
+generate:
+	@echo "Generating sample project.."
+	@echo "print('Hello Human!')" > $(main)
+	@touch $(deps_name)
+	@touch $(lock_name)
+	@$(MAKE) -s venv
