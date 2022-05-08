@@ -6,12 +6,15 @@
 package_folder := vendor
 params := 
 
+# Run even if a file or folder with the same name exists
+.PHONY: serve install seed model new setup
+
 # Start server
 serve: vendor
 	php artisan serve $(params)
 
 # Install dependencies and keys
-install:
+install: composer.json
 	@echo "Installing PHP dependencies.."
 	@composer install --no-interaction --quiet
 	@echo "Installing Node dependencies.."
