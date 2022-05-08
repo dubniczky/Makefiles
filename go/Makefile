@@ -3,7 +3,7 @@
 # https://gitlab.com/richardnagy/makefiles
 
 # Settings
-main := $(main)
+main := main.go
 bins := bin
 target := main
 params := 
@@ -21,6 +21,7 @@ clean:
 	@rm -rf ./$(bins)/*
 	@go clean
 	@go fmt
+	@go mod tidy
 
 # Compile target dependency
 ./bin/$(target):
@@ -46,4 +47,12 @@ run: ./$(bins)/$(target)
 
 # Create a go package
 init:
-	@go mod init
+	@go mod init mainmodule
+
+generate:
+	@echo "Generating sample project.."
+	@echo 'package main\nimport "fmt"\nfunc main(){fmt.Println("Hello Human!")}' > $(main)
+	@touch go.sum
+	-@$(MAKE) -s init 2> /dev/null
+	@go fmt > /dev/null
+	@echo "Done."
