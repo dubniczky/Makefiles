@@ -1,0 +1,6 @@
+# IMPORTANT: This gitignore is for the Makefiles project.
+# Do not use in your own project, it ignores important files!
+
+main.go
+go.mod
+bin/
