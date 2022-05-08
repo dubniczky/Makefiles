@@ -20,4 +20,4 @@ These Makefiles were created for specific development purposes, then updated to 
 |---|---|
 |[go](./go/)|`go`, `mod`, `main`|
 |[python](./python/)|`python`, `venv`|
-|[laravel](./python/)|`laravel`, `php`, `composer`, `npm`, `mix`|
+|[laravel](./laravel/)|`laravel`, `php`, `composer`, `npm`, `mix`|
