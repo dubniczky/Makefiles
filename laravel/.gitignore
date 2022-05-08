@@ -34,5 +34,4 @@ artisan
 composer.json
 package.json
 phpunit.xml
-README.md
 webpack.mix.js
