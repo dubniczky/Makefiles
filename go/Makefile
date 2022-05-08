@@ -11,7 +11,7 @@ bflags :=
 pflags := 
 
 # Run even if a file or folder with the same name exists
-.PHONY: all clean build publish run init
+.PHONY: all clean build publish run init generate
 
 # Default command if no parameters are given to make
 all: clean build run
