@@ -1,0 +1,7 @@
+# IMPORTANT: This gitignore is for the Makefiles project.
+# Do not use in your own project, it ignores important files!
+
+.venv/
+main.py
+requirements.txt
+pip.lock
