@@ -18,4 +18,5 @@ These Makefiles were created for specific development purposes, then updated to 
 
 |Makefile|Tags|
 |---|---|
+|[go](./go/)|`go`, `mod`, `main`|
 |[python](./python/)|`python`, `venv`|
