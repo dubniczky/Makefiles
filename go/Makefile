@@ -11,7 +11,7 @@ bflags :=
 pflags := 
 
 # Run even if a file or folder with the same name exists
-.PHONY: all clean build publish run init generate
+.PHONY: all clean build publish run init new
 
 # Default command if no parameters are given to make
 all: clean build run
@@ -49,7 +49,8 @@ run: ./$(bins)/$(target)
 init:
 	@go mod init mainmodule
 
-generate:
+# Generate a new sample start project
+new:
 	@echo "Generating sample project.."
 	@echo 'package main\nimport "fmt"\nfunc main(){fmt.Println("Hello Human!")}' > $(main)
 	@touch go.sum
