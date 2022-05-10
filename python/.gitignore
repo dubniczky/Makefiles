@@ -2,6 +2,8 @@
 # Do not use in your own project, it ignores important files!
 
 .venv/
+__pycache__/
+*.pyc
 main.py
 requirements.txt
 pip.lock
