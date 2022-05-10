@@ -65,6 +65,8 @@ deploy: $(lock_name)
 	@pip install -r $(lock_name)
 	@echo "### Compiling project.."
 	@$(pybin) -O -m compileall -b .
+	@echo "### Removing source python files.."
+	@find . -name "*.py" -type f -delete
 	@echo "### Completed."
 
 # Runs the application in production mode without virtual environment from pyc files
