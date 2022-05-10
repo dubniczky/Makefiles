@@ -11,10 +11,11 @@ test_lib := pytest
 pybin := python3
 main := main.py
 params := 
+deploy_params := 
 caches := __pycache__/
 
 # Run even if a file or folder with the same name exists
-.PHONY: clean venv install run generate lock
+.PHONY: clean venv install run generate lock deploy up
 
 # Run program from virtual environment
 # Create virtual env if one does not exist, update requirements if changed
@@ -54,6 +55,21 @@ generate:
 	@touch $(deps_name)
 	@touch $(lock_name)
 	@$(MAKE) -s venv
+
+# Cleans up, install packages globally from lock, and compiles project to pyc files
+deploy: $(lock_name)
+	@echo "### Deploying application.."
+	@echo "### Cleaning up.."
+	@$(MAKE) -s clean
+	@echo "### Installing packages from lock.. ($(lock_name))"
+	@pip install -r $(lock_name)
+	@echo "### Compiling project.."
+	@$(pybin) -O -m compileall -b .
+	@echo "### Completed."
+
+# Runs the application in production mode without virtual environment from pyc files
+up:
+	$(pybin) $(main)c $(deploy_params)
 
 # Runs the linter
 lint:
