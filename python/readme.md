@@ -16,6 +16,8 @@ A Makefile for python environments using venv and a requirements file to track d
 |`make clean`|Deletes the virtual environment and python cache folders|
 |`make venv`|Creates a new virtual environment|
 |`make generate`|Creates a basic project to run with a main file, empty pacakge list and venv|
+|`make deploy`|Cleans up, install packages globally from lock, and compiles project to pyc files|
+|`make up`|Runs the application in production mode without virtual environment from pyc files|
 |`make lint`|Runs specified linter|
 |`make test`|Runs specified tester|
 
@@ -31,4 +33,5 @@ A Makefile for python environments using venv and a requirements file to track d
 |`pybin`|`python3`|Name of the python binary to call|
 |`main`|`main.py`|Name of the entry point of the application|
 |`params`||Parameters to pass to the main entry on run|
+|`deploy_params`||Parameters to pass to the main entry on deployment run|
 |`caches`|`__pycache__/`|Space separated list of folders and files to remove on clean command|
