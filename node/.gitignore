@@ -1,0 +1,9 @@
+# IMPORTANT: This gitignore is for the Makefiles project.
+# Do not use in your own project, it ignores important files!
+
+node_modules/
+main.js
+package.json
+yarn.lock
+yarn-error.log
+.eslintrc.yml
