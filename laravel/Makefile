@@ -4,17 +4,14 @@
 
 # Settings
 package_folder := vendor
-params := 
-
-# Run even if a file or folder with the same name exists
-.PHONY: serve install seed model new setup
+params :=
 
 # Start server
-serve: vendor
+serve:: vendor
 	php artisan serve $(params)
 
 # Install dependencies and keys
-install: composer.json
+install:: composer.json
 	@echo "Installing PHP dependencies.."
 	@composer install --no-interaction --quiet
 	@echo "Installing Node dependencies.."
@@ -26,23 +23,23 @@ install: composer.json
 	@echo "Done."
 
 # Seed the database
-seed:
+seed::
 	@php artisan migrate:fresh
 	@php artisan db:seed
 
 # Generate a model with all components
-model:
+model::
 	@$(if $(value mod),,$(error Model is not set, use: make model mod=MODELNAME))
 	@echo "Generating model: $(mod)"
 	@php artisan make:model $(mod) -a
 
 # Generate a new laravel project from sample
-new:
+new::
 	@echo "Generating new Laravel project.."
 	composer create-project laravel/laravel default
 
 # Setup php and composer using apt and apache
-setup:
+setup::
 	@echo "Installing php.."
 	sudo apt install -y \
 		apache2\
