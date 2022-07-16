@@ -6,33 +6,26 @@
 main := main.go
 bins := bin
 target := main
-params := 
-bflags := 
-pflags := 
-
-# Run even if a file or folder with the same name exists
-.PHONY: all clean build publish run init new
+params :=
+bflags :=
+pflags :=
 
 # Default command if no parameters are given to make
-all: clean build run
+all:: clean build run
 
 # Cleans up project. Removes binaries and formats code
-clean:
+clean::
 	@rm -rf ./$(bins)/*
 	@go clean
 	@go fmt
 	@go mod tidy
 
-# Compile target dependency
-./bin/$(target):
-	@$(MAKE) -s build
-
 # Compile main target
-build: $(main)
+build:: $(main)
 	@go build -o ./$(bins)/$(target) $(bflags) $(main)
 
 # Compile project to multiple platforms
-publish: $(main) clean
+publish:: $(main) clean
 	GOOS=linux   GOARCH=amd64 go build -o ./$(bins)/$(target)-linux-x64   $(pflags) $(main)
 	GOOS=linux   GOARCH=386   go build -o ./$(bins)/$(target)-linux-x86   $(pflags) $(main)
 	GOOS=linux   GOARCH=arm   go build -o ./$(bins)/$(target)-linux-arm   $(pflags) $(main)
@@ -42,18 +35,23 @@ publish: $(main) clean
 	GOOS=windows GOARCH=386   go build -o ./$(bins)/$(target)-windows-x86 $(pflags) $(main)
 
 # Run the compiled target and build if it does not exist
-run: ./$(bins)/$(target)
+run:: ./$(bins)/$(target)
 	@./$(bins)/$(target) $(params)
 
 # Create a go package
-init:
+init::
 	@go mod init mainmodule
 
 # Generate a new sample start project
-new:
+new::
 	@echo "Generating sample project.."
 	@echo 'package main\nimport "fmt"\nfunc main(){fmt.Println("Hello Human!")}' > $(main)
 	@touch go.sum
 	-@$(MAKE) -s init 2> /dev/null
 	@go fmt > /dev/null
 	@echo "Done."
+
+
+# Compile target dependency
+./bin/$(target):
+	@$(MAKE) -s build
