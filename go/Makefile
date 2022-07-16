@@ -10,6 +10,21 @@ params := # debug parameters
 bflags := # Build parameters
 pflags := # Publish parameters
 
+# Default help command to list available commands
+help::
+	@echo "Go development makefile"
+	@echo ""
+	@echo "Command utilities:"
+	@echo "make|make help - This command, shows available commands"
+	@echo "make clean" - Removes binaries and runs go format, tidy and clean utilities
+	@echo "make build" - Builds a debug version of the application
+	@echo "make publish" - Builds a release version of the application for multiple platforms
+	@echo "make run" - Runs the compiled debug version, auto builds if missing or outdated
+	@echo ""
+	@echo "One-time commands:"
+	@echo "make init" - Creates a new default go module
+	@echo "make new" - Creates a new sample Hello-world project
+
 # Default command if no parameters are given to make
 all:: clean build run
 
