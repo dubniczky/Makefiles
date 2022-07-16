@@ -3,12 +3,12 @@
 # https://gitlab.com/richardnagy/makefiles
 
 # Settings
-main := main.go
-bins := bin
-target := main
-params :=
-bflags :=
-pflags :=
+main := main.go # Main entry point
+bins := bin # Folder for binaries
+target := main # Final executable base name
+params := # debug parameters
+bflags := # Build parameters
+pflags := # Publish parameters
 
 # Default command if no parameters are given to make
 all:: clean build run
