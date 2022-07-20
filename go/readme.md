@@ -4,19 +4,18 @@ A Makefile for go environments using a standard go module.
 
 > Don't forget to customize settings parameters and scripts for your specific project.
 
-[[_TOC_]]
-
 ## Commands
 
 |Command|Effect|
 |---|---|
-|`make`, `make all`|Cleans, compiles then runs the project|
-|`make run`|Runs the project, builds if does not exist|
-|`make clean`|Removes build files, formats code and tidies the modules|
-|`make build`|Builds the project|
-|`make publish`|Builds the project to multiple platforms|
-|`make new`|Builds the project to multiple platforms|
-|`make init`|Creates a go module with the name `mainmodule`. Rename the module after running the command|
+|`make`, `make help`|Shows this help message|
+|`make all`|Run clean, build, run consecutively|
+|`make run`|Runs the compiled debug version, auto builds if missing or outdated|
+|`make clean`|Removes binaries and runs go format, tidy and clean utilities|
+|`make build`|Builds a debug version of the application|
+|`make publish`|Builds a release version of the application for multiple platforms|
+|`make new`|Creates a new sample Hello-world project|
+|`make init`|Creates a new default go module|
 
 ## Settings
 

@@ -1,6 +1,7 @@
 # Makefile for go development
 # Richard Antal Nagy, 2022
-# https://gitlab.com/richardnagy/makefiles
+# https://github.com/dubniczky/Makefiles
+
 
 # Settings
 main := main.go # Main entry point
@@ -20,6 +21,7 @@ help::
 	@echo "make build" - Builds a debug version of the application
 	@echo "make publish" - Builds a release version of the application for multiple platforms
 	@echo "make run" - Runs the compiled debug version, auto builds if missing or outdated
+	@echo "make all" - Run clean, build, run consecutively
 	@echo ""
 	@echo "One-time commands:"
 	@echo "make init" - Creates a new default go module

@@ -4,8 +4,6 @@ A Makefile for laravel environments using composer, artisan and npm.
 
 > Don't forget to customize settings parameters and scripts for your specific project.
 
-[[_TOC_]]
-
 ## Commands
 
 |Command|Effect|

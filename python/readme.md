@@ -4,8 +4,6 @@ A Makefile for python environments using venv and a requirements file to track d
 
 > Don't forget to customize settings parameters and scripts for your specific project.
 
-[[_TOC_]]
-
 ## Commands
 
 |Command|Effect|

@@ -1,29 +1,33 @@
 # Makefile for nodejs applicatios
 # Richard Antal Nagy, 2022
-# https://gitlab.com/richardnagy/makefiles
+# https://github.com/dubniczky/Makefiles
 
 
 # Settings
-pm := yarn # Package manager (commands might not be compatible with all)
-lockfile := yarn.lock # Lockfile path
-modules := node_modules # Node package patch (probably node_modules)
-node := node # Node command used for package checking
-devnode := npx nodemon # Node command used for development
-depnode := npx pm2-runtime start # Node command used in deployment mode
-main := main.js # Main entry point of the application
-debug_args := --trace-exit --trace-uncaught --trace-warnings # Arguments for debug runtime
-deploy_args := # Arguments for deployment runtime
-container := myapp:api # Container name:tag
-container_port_internal := 8080 # Container internal exposed port
-container_port_external := 4000 # Container external exposed port
+pm := yarn
+lockfile := yarn.lock
+modules := node_modules
+node := node
+devnode := npx nodemon
+depnode := npx pm2-runtime start
+main := main.js
+debug_args := --trace-exit --trace-uncaught --trace-warnings
+deploy_args :=
+container := myapp:api
+container_port_internal := 8080
+container_port_external := 4000
+
+
+# Run even if a file or folder with the same name exists
+.PHONY: dev lint fix test testwatch install deploy start container run new
 
 
 # Start the application in development mode
-dev:: $(main) $(modules)
+dev: $(main) $(modules)
 	$(devnode) $(debug_args) $(main)
 
 # Run compile test and eslint
-lint:: $(modules)
+lint: $(modules)
 	@echo "Compile test.."
 	@$(node) --check $(main)
 	@echo "OK"
@@ -32,42 +36,42 @@ lint:: $(modules)
 	@echo "OK"
 
 # Fixes auto fixable format errors
-fix:: $(modules)
+fix: $(modules)
 	npx eslint . --fix
 
 # Runs tests
-test:: $(modules)
+test: $(modules)
 	NODE_OPTIONS='--experimental-vm-modules' npx jest .
 
 # Runs tests in interactive mode
-testwatch:: $(modules)
+testwatch: $(modules)
 	NODE_OPTIONS='--experimental-vm-modules' npx jest . --watch
 
 # Install packages (development mode)
-install:: package.json
+install: package.json
 	$(pm) install
 
 # Install packages (deployment mode)
-deploy:: $(lockfile)
+deploy: $(lockfile)
 	@echo "Creating deployment.."
 	$(pm) install --silent --prod --frozen-lockfile
 
 # Start the application in deployment mode
-start:: $(modules)
+start: $(modules)
 	$(depnode) $(deploy_args) $(main)
 
 # Create container
-container::
+container:
 	@echo "Building container.. ($(container))"
 	@docker build -t $(container) .
 
 # Run container
-run::
+run:
 	@echo "Starting continer.. ($(container))"
 	@docker run -p$(container_port_external):$(container_port_internal) $(container)
 
 # Create a new project
-new::
+new:
 	@echo "Creating package.."
 	$(pm) init -y
 	@echo "Installing default packages.."

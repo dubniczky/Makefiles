@@ -1,6 +1,7 @@
 # Makefile for Laravel development
 # Richard Antal Nagy, 2022
-# https://gitlab.com/richardnagy/makefiles
+# https://github.com/dubniczky/Makefiles
+
 
 # Settings
 package_folder := vendor

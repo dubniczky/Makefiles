@@ -2,7 +2,11 @@
 
 Collection of custom Makefiles for development environments.
 
-[[_TOC_]]
+## Support ❤️
+
+If you find the project useful, please consider supporting, or contributing.
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dubniczky)
 
 ## Disclaimer
 
@@ -19,5 +23,6 @@ These Makefiles were created for specific development purposes, then updated to 
 |Makefile|Tags|
 |---|---|
 |[go](./go/)|`go`, `mod`, `main`|
-|[python](./python/)|`python`, `venv`|
 |[laravel](./laravel/)|`laravel`, `php`, `composer`, `npm`, `mix`|
+|[node](./node/)|`nodejs`, `javascript`, `npm`, `yarn`|
+|[python](./python/)|`python`, `venv`|

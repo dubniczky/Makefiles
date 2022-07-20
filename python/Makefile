@@ -1,6 +1,7 @@
 # Makefile for python applications using venv
 # Richard Antal Nagy, 2022
-# https://gitlab.com/richardnagy/makefiles
+# https://github.com/dubniczky/Makefiles
+
 
 # Settings
 venv_name := .venv
@@ -10,8 +11,8 @@ lint_lib := pylint
 test_lib := pytest
 pybin := python3
 main := main.py
-params := 
-deploy_params := 
+params :=
+deploy_params :=
 caches := __pycache__/
 
 # Run even if a file or folder with the same name exists
